@@ -17,15 +17,14 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
         $email = htmlspecialchars($_POST['email']);
         $password = htmlspecialchars($_POST['password']);
 
-
+        // Force user connection to access dashboard
         userConnection($db, $email, $password);
 
         if (userConnection($db, $email, $password)) {
             header('Location: dashboard.php');
         } else {
-            $error = "Veuillez renseigner un autre identifiant";
+            $error = "Mauvais identifiants";
         }
-
 
     } else {
         $error = 'Champs requis !';
@@ -37,4 +36,4 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
  ********************************/
 include 'view/_header.php';
 include 'view/login.php';
-include 'view/_footer.php';
+include 'view/
