@@ -11,26 +11,6 @@ require('model/functions.fn.php');
  * PROCESS
  ********************************/
 
-if (isset($_POST['email']) && isset($_POST['password'])) {
-    if (!empty($_POST['email']) && !empty($_POST['password'])) {
-
-        $email = htmlspecialchars($_POST['email']);
-        $password = htmlspecialchars($_POST['password']);
-
-
-        userConnection($db, $email, $password);
-
-        if (userConnection($db, $email, $password)) {
-            header('Location: dashboard.php');
-        } else {
-            $error = "Veuillez renseigner un autre identifiant";
-        }
-
-
-    } else {
-        $error = 'Champs requis !';
-    }
-}
 
 /********************************
  * VIEW
