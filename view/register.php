@@ -23,7 +23,7 @@
 					</div>
 					<div class="form-input">
 						<span class="password">
-							<input type="password" name="password" placeholder="Password">
+							<input type="password" name="password" placeholder="password">
 						</span>
 					</div>
 
