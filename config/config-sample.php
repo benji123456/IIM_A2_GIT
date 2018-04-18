@@ -1,16 +1,37 @@
-<?php
+<?php session_start();
+require('config/config.php');
+require('model/functions.fn.php');
 
-$host = 'localhost';
-$dbname = 'IIM_Git_SoundCloud';
-$user = 'username';
-$pass = 'password';
+/*===============================
+	Register
+===============================*/
 
 
-try{
-	$db = new PDO('mysql:host='.$host.';dbname='.$dbname, $user, $pass, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
+if (isset($_POST['email']) && isset($_POST['password']) && isset($_POST['username'])) {
+    if (!empty($_POST['email']) && !empty($_POST['password']) && !empty($_POST['username'])) {
+
+        $username = htmlspecialchars($_POST['username']);
+        $email = htmlspecialchars($_POST['email']);
+        $password = htmlspecialchars($_POST['password']);
+
+        if(isUsernameAvailable($db, $username)) {
+            if(isEmailAvailable($db, $email)) {
+                userRegistration($db, $username, $email, $password);
+                header('Location: dashboard.php');
+            } else {
+                $error = "Email indisponible";
+            }
+        } else {
+            $error = "Username indisponible";
+        }
+
+
+
+    } else {
+        $error = 'Champs requis !';
+    }
 }
-catch(Exception $e)
-{
-	echo 'Erreur : '.$e->getMessage().'<br />';
-	echo 'N° : '.$e->getCode();
-}
+
+include 'view/_header.php';
+include 'view/register.php';
+include 'view/_footer.php';
